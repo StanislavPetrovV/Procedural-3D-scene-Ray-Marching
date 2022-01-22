@@ -159,7 +159,7 @@ mat3 getCam(vec3 ro, vec3 lookAt) {
 
 void mouseControl(inout vec3 ro) {
     vec2 m = u_mouse / u_resolution;
-    pR(ro.yz, m.y * PI * 0.5 - 0.5);
+    pR(ro.yz, m.y * PI * 0.4 - 0.4);
     pR(ro.xz, m.x * TAU);
 }
 
