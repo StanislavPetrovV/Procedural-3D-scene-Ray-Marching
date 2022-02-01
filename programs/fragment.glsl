@@ -64,14 +64,14 @@ vec2 map(vec3 p) {
     pMod1(p.z, 15);
     // roof
     vec3 pr = p;
-    pr.y -= 15.5;
+    pr.y -= 15.7;
     pR(pr.xy, 0.6);
     pr.x -= 18.0;
-    float roofDist = fBox2(pr.xy, vec2(20, 0.3));
+    float roofDist = fBox2Cheap(pr.xy, vec2(20, 0.5));
     float roofID = 4.0;
     vec2 roof = vec2(roofDist, roofID);
     // box
-    float boxDist = fBox(p, vec3(3,9,4));
+    float boxDist = fBoxCheap(p, vec3(3,9,4));
     float boxID = 3.0;
     vec2 box = vec2(boxDist, boxID);
     // cylinder
@@ -81,7 +81,7 @@ vec2 map(vec3 p) {
     float cylinderID = 3.0;
     vec2 cylinder = vec2(cylinderDist, cylinderID);
     // wall
-    float wallDist = fBox2(p.xy, vec2(1, 15));
+    float wallDist = fBox2Cheap(p.xy, vec2(1, 15));
     float wallID = 3.0;
     vec2 wall = vec2(wallDist, wallID);
     // result
@@ -89,7 +89,7 @@ vec2 map(vec3 p) {
 //    res = wall;
     res = fOpUnionID(box, cylinder);
     res = fOpDifferenceColumnsID(wall, res, 0.6, 3.0);
-    res = fOpUnionChamferID(res, roof, 0.9);
+    res = fOpUnionChamferID(res, roof, 0.6);
     res = fOpUnionStairsID(res, plane, 4.0, 5.0);
     res = fOpUnionID(res, sphere);
     res = fOpUnionID(res, torus);
