@@ -12,14 +12,14 @@ class App(mglw.WindowConfig):
         # uniforms
         self.program['u_resolution'] = self.window_size
 
-    def render(self, time, frame_time):
+    def on_render(self, time, frame_time):
         self.ctx.clear()
         self.program['u_time'] = time
         self.quad.render(self.program)
 
-    def mouse_position_event(self, x, y, dx, dy):
+    def on_mouse_position_event(self, x, y, dx, dy):
         self.program['u_mouse'] = (x, y)
 
 
 if __name__ == '__main__':
-    mglw.run_window_config(App)
+    App.run()
